@@ -1,0 +1,62 @@
+﻿@model blogCSharp.Models.Post
+
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+        <div class="row">
+            <div class="col-lg-8 entries">
+
+                @{
+                    var base64 = Convert.ToBase64String(Model.Image);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <article class="entry entry-single">
+                    <div class="entry-img">
+                        <img src="@imgSrc" alt="" class="img-fluid">
+                    </div>
+
+                    <h2 class="entry-title">
+                        @Model.Title
+                    </h2>
+
+                    <div class="entry-meta">
+                        <ul>
+                            <li class="d-flex align-items-center">
+                                <i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="entry-content">
+                        <p>
+                            @Model.Content
+                        </p>
+                    </div>
+                </article><!-- End blog entry -->
+            </div><!-- End blog entries list -->
+
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <h3 class="sidebar-title">Search</h3>
+                    <div class="sidebar-item search-form">
+                        <form asp-action="GetPost" asp-controller="Post">
+                            <input type="text" name="postId" value="@Model.Id" style="display: none;">
+                            <input type="text" name="title">
+                            <button type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div><!-- End sidebar search formn-->
+
+                    <partial name="_SearchSidebar" />
+
+                </div><!-- End sidebar -->
+            </div><!-- End blog sidebar -->
+
+        </div>
+
+    </div>
+</section><!-- End Blog Single Section -->

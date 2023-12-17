@@ -1,0 +1,14 @@
+﻿<h3 class="sidebar-title">Recent Posts</h3>
+@foreach (var post in ViewBag.AllPosts)
+{
+    var base_64 = Convert.ToBase64String(post.Image);
+    var img_Src = String.Format("data:image/gif;base64,{0}", base_64);
+
+    <div class="sidebar-item recent-posts">
+        <div class="post-item clearfix">
+            <img src="@img_Src" alt="">
+            <h4><a asp-action="GetPost" asp-controller="Post" asp-route-postId="@post.Id">@post.Title</a></h4>
+            <time datetime="2020-01-01">@post.DatePost</time>
+        </div>
+    </div>
+}

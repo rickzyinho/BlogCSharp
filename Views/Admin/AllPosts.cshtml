@@ -1,0 +1,57 @@
+﻿@model List<blogCSharp.Models.Post>
+
+@{
+    Layout = "_LayoutAdminLte";
+}
+
+
+<div class="content-wrapper">
+    <div id="messageStatus" class="alert alert-success" role="alert" style="display: none;" messageAlert>
+        <span message></span>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" style="display:none">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Resume</th>
+                <th scope="col">Content</th>
+                <th scope="col">Image</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row" style="display:none">@item.Id</td>
+                    <td style="display:none">@item.Title</td>
+                    <td>@item.Title.Substring(0, 5)...</td>
+                    <td style="display:none">@item.Resume</td>
+                    <td>@item.Resume.Substring(0, 5)...</td>
+                    <td style="display:none">@item.Content</td>
+                    <td>@item.Content.Substring(0, 5)...</td>
+
+                    @{
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <td>
+                        <img id="image" src='@imgSrc' style="max-width:100px; max-height:100px;">
+                    </td>
+                    <td align="right" class="btn-group">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit"
+                                data-bs-whatever="edit" onclick="Edit(this)">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="Delete(this)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <partial name="_ModalUpdatePost" />
+</div>

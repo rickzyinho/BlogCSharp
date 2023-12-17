@@ -1,0 +1,76 @@
+﻿@model List<blogCSharp.Models.Post>
+
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+        <div class="row">
+            <div class="col-lg-8 entries">
+                @foreach (var post in Model)
+                {
+                    var base64 = Convert.ToBase64String(post.Image);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+                    <article class="entry">
+                        <div class="entry-img">
+                            <img src="@imgSrc" alt="" class="img-fluid">
+                        </div>
+
+                        <h2 class="entry-title">
+                            <a href="blog-single.html">@post.Title</a>
+                        </h2>
+
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center">
+                                    <i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="bi bi-clock"></i> <a href="blog-single.html">
+                                        <time datetime="2020-01-01">Jan 1, 2020</time>
+                                    </a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="bi bi-chat-dots"></i> <a href="blog-single.html">
+                                        12
+                                        Comments
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="entry-content">
+                            <p>
+                                @post.Resume
+                            </p>
+                            <div class="read-more">
+                                <a asp-action="GetPost" asp-controller="Post" asp-route-postId="@post.Id">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+                }
+                @* <div class="blog-pagination">
+                <ul class="justify-content-center">
+                <li><a href="#">1</a></li>
+                <li class="active"><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                </ul>
+                </div> *@
+            </div><!-- End blog entries list -->
+
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <h3 class="sidebar-title">Search</h3>
+                    <div class="sidebar-item search-form">
+                        <form asp-action="Index" asp-controller="Home" method="post">
+                            <input type="text" name="title">
+                            <button type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div><!-- End sidebar search formn-->
+
+                    <partial name="_SearchSidebar" />
+
+                </div><!-- End sidebar -->
+            </div><!-- End blog sidebar -->
+        </div>
+    </div>
+</section><!-- End Blog Section -->

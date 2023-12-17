@@ -1,0 +1,86 @@
+@model blogCSharp.ViewModel.UserViewModel;
+
+@{
+    Layout = "";
+}
+<html>
+
+<head>
+    <link rel="stylesheet" href="~/assets/css/styleAdmin.css" />
+</head>
+
+<body>
+    <div class="container">
+        <a class="links" id="paracadastro"></a>
+        <a class="links" id="paralogin"></a>
+
+        <div class="content">
+            <!--FORMULÁRIO DE LOGIN-->
+            <div id="login">
+                <form method="post" asp-action="Logged" asp-controller="Admin">
+                    <h1>Login</h1>
+                    <p>
+                        <label asp-for="Email"></label>
+                        <input id="email_login" asp-for="Email" required="required" type="text"
+                               placeholder="contato@htmlecsspro.com" />
+                    </p>
+
+                    <p>
+                        <label asp-for="Password">Sua senha</label>
+                        <input id="senha_login" asp-for="Password" required="required" type="password"
+                               placeholder="1234" />
+                    </p>
+
+                    <p>
+                        <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
+                        <label for="manterlogado">Manter-me logado</label>
+                    </p>
+
+                    <p>
+                        <input type="submit" value="Logar" />
+                    </p>
+
+                    <p class="link">
+                        Ainda não tem conta?
+                        <a href="#paracadastro">Cadastre-se</a>
+                    </p>
+                </form>
+            </div>
+
+            <!--FORMULÁRIO DE CADASTRO-->
+            <div id="cadastro">
+                <form method="post" asp-action="Register" asp-controller="Admin">
+                    <h1>Cadastro</h1>
+
+                    <p>
+                        <label asp-for="Name"></label>
+                        <input id="nome_cad" asp-for="Name" required="required" type="text"
+                               placeholder="Luiz Augusto" />
+                    </p>
+
+                    <p>
+                        <label asp-for="Email"></label>
+                        <input id="email_cad" asp-for="Email" required="required" type="email"
+                               placeholder="contato@htmlecsspro.com" />
+                    </p>
+
+                    <p>
+                        <label asp-for="Password"></label>
+                        <input id="senha_cad" asp-for="Password" required="required" type="password" placeholder="1234" />
+                    </p>
+
+                    <p>
+                        <input type="submit" value="Cadastrar" />
+                    </p>
+
+                    <p class="link">
+                        Já tem conta?
+                        <a href="#paralogin"> Ir para Login </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
